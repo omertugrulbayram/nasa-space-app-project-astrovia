@@ -274,17 +274,34 @@
                 </div>
 
             <!-- Video section -->
-                <div class="hero-video" data-aos="fade-up" data-aos-delay="600">
-                <div class="video-container">
-                <video width="560" height="315" autoplay muted loop playsinline>
-                <source src="videos/info.mp4" type="video/mp4">
-                Tarayıcınız video etiketini desteklemiyor.
-            </video>
-            </div>
-            <p class="video-description" data-translate="video-description">
-            30 saniyelik tanıtım videosu - AstroVia'nın gücünü keşfet
-            </p>
-            </div>
+<div class="hero-video" data-aos="fade-up" data-aos-delay="600">
+    <div class="video-container">
+        <video id="astroVideo" width="560" height="315" loop playsinline>
+            <source src="videos/info.mp4" type="video/mp4">
+            Tarayıcınız video etiketini desteklemiyor.
+        </video>
+    </div>
+    <p class="video-description" data-translate="video-description">
+        30 saniyelik tanıtım videosu - AstroVia'nın gücünü keşfet
+    </p>
+</div>
+
+<script>
+const video = document.getElementById("astroVideo");
+
+// İlk başta sessiz başlat
+video.muted = true;
+video.autoplay = true;
+video.play();
+
+// Kullanıcı sayfada herhangi bir yere tıklayınca sesi aç
+document.addEventListener("click", () => {
+    if (video.muted) {
+        video.muted = false;
+        video.play();
+    }
+});
+</script>
 
             <!-- Slide links -->
             <div class="hero-slides" data-aos="fade-up" data-aos-delay="700">
@@ -1191,6 +1208,7 @@ Stone: ~2500, Iron: ~7800 kg/m³. Dense asteroids carry more kinetic energy.
     </script>
 </body>
 </html>
+
 
 
 
