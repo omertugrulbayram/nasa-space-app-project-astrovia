@@ -155,9 +155,9 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 
 ## 📞 Contact
 
-- **Website**: [astrovia.vercel.app](https://astrovia.vercel.app)
+- **Website**: [astrovia.vercel.app](https://omertugrulbayram.github.io/nasa-space-app-project-astrovia/)
 - **Email**: info@astrovia.space
-- **GitHub**: [github.com/astrovia](https://github.com/astrovia)
+- **GitHub**: [github.com/astrovia](https://github.com/omertugrulbayram/nasa-space-app-project-astrovia)
 
 ## 🙏 Acknowledgments
 
@@ -169,5 +169,6 @@ This project is licensed under the MIT License - see the [LICENSE](LICENSE) file
 ---
 
 **⚠️ Disclaimer**: This tool is for educational and awareness purposes only. It is not an official early warning system. For real asteroid threat assessment, consult official space agencies.
+
 
 **🌍 Made with ❤️ for NASA Space Apps Challenge 2025**
