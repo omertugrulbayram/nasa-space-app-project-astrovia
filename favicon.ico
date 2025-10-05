@@ -1,0 +1,11 @@
+# AstroVia Favicon Implementation
+# This file should be replaced with an actual ICO file
+# The favicon should be based on the AstroVia logo with:
+# - Stylized planet with rings (purple/blue)
+# - Orange/red meteor with glowing tail
+# - White "ASTROVIA" text on dark background
+# - 16x16, 32x32, and 48x48 pixel sizes
+# - Optimized for small display sizes
+
+# For now, the browser will use the apple-touch-icon as fallback
+# which is configured to use /brand/astrovia-mark.webp

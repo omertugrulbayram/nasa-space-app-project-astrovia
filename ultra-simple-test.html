@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ULTRA SIMPLE TEST</title>
+    <style>
+        body { font-family: Arial; padding: 20px; background: #0b1220; color: white; }
+        .lang-btn { background: #ff7a00; border: none; color: white; padding: 10px 20px; margin: 5px; cursor: pointer; border-radius: 5px; }
+        .lang-btn.active { background: #00ff00; color: #000; }
+    </style>
+</head>
+<body>
+    <h1>ULTRA SIMPLE TEST</h1>
+    
+    <button class="lang-btn active" data-lang="tr">TR</button>
+    <button class="lang-btn" data-lang="en">EN</button>
+    
+    <div id="content">
+        <h2 data-translate="hero-title">AstroVia</h2>
+        <p data-translate="hero-subtitle">Gelişmiş Asteroid Savunma</p>
+    </div>
+
+    <script>
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('lang-btn')) {
+                console.log('BUTON TIKLANDI:', e.target.textContent);
+                
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const lang = e.target.getAttribute('data-lang');
+                console.log('Dil:', lang);
+                
+                if (!lang) return;
+                
+                // Butonları güncelle
+                document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                // Basit çeviri
+                if (lang === 'tr') {
+                    document.querySelectorAll('[data-translate="hero-title"]').forEach(el => el.textContent = 'AstroVia');
+                    document.querySelectorAll('[data-translate="hero-subtitle"]').forEach(el => el.textContent = 'Gelişmiş Asteroid Savunma');
+                } else if (lang === 'en') {
+                    document.querySelectorAll('[data-translate="hero-title"]').forEach(el => el.textContent = 'AstroVia');
+                    document.querySelectorAll('[data-translate="hero-subtitle"]').forEach(el => el.textContent = 'Advanced Asteroid Defense');
+                }
+                
+                console.log('TAMAMLANDI!');
+            }
+        });
+    </script>
+</body>
+</html>

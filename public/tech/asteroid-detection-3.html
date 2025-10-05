@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>3. Dosya Gruplama ve Zaman Sıralama</title>
+    <style>
+        body { 
+            background: #0b1220; 
+            color: white; 
+            font-family: 'Courier New', monospace; 
+            margin: 0; 
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .title { font-size: 28px; font-weight: bold; text-align: center; margin: 20px 0; color: #ff7a00; }
+        .code-block { 
+            background: #1a1a2e; 
+            border: 1px solid #333; 
+            border-radius: 8px; 
+            padding: 20px; 
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        .code-title { font-size: 18px; font-weight: bold; color: #00ff00; margin-bottom: 10px; }
+        .comment { color: #888; }
+        .keyword { color: #ff6b6b; }
+        .string { color: #4ecdc4; }
+        .function { color: #45b7d1; }
+        .number { color: #f9ca24; }
+        .step { 
+            background: rgba(255, 122, 0, 0.1); 
+            border-left: 4px solid #ff7a00; 
+            padding: 15px; 
+            margin: 15px 0;
+        }
+        .step-title { font-weight: bold; color: #ff7a00; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">3. Dosya Gruplama ve Zaman Sıralama</div>
+        
+        <div class="step">
+            <div class="step-title">FITS Dosyalarını Gruplama</div>
+            <div class="code-block">
+                <div class="code-title">Python Kodu:</div>
+                <span class="keyword">import</span> os<br>
+                <span class="keyword">from</span> astropy.io <span class="keyword">import</span> fits<br>
+                <span class="keyword">from</span> collections <span class="keyword">import</span> defaultdict<br>
+                <span class="keyword">import</span> glob<br><br>
+
+                <span class="keyword">def</span> <span class="function">get_group_key</span>(filename):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"""Dosya adından grup anahtarını çıkarır"""</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;parts = filename.split(<span class="string">'.'</span>)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Son iki parçayı (.pXX ve .fits) atarız</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="string">"."</span>.join(parts[:-<span class="number">2</span>])<br><br>
+
+                <span class="keyword">def</span> <span class="function">get_observation_time</span>(filepath):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"""FITS başlığından gözlem zamanını okur"""</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">try</span>:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">with</span> fits.open(filepath) <span class="keyword">as</span> hdul:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;header = hdul[<span class="number">0</span>].header<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;time_key = <span class="string">'MJD-OBS'</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> time_key <span class="keyword">in</span> header:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> header[time_key]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">except</span> Exception <span class="keyword">as</span> e:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(f<span class="string">"Zaman okunamadı: {filepath}"</span>)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="number">0.0</span>
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">Özellikler:</div>
+            <ul>
+                <li>✅ Aynı gökyüzü bölgesine ait dosyaları gruplama</li>
+                <li>✅ FITS başlığından zaman bilgisi okuma</li>
+                <li>✅ Dosyaları zamana göre sıralama</li>
+                <li>✅ Hata kontrolü ve güvenli dosya işleme</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

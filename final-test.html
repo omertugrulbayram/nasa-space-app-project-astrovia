@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FINAL TEST - TR/EN BUTONLARI</title>
+    <style>
+        body { 
+            font-family: Arial; 
+            padding: 20px; 
+            background: #0b1220; 
+            color: white; 
+        }
+        .lang-btn { 
+            background: #ff7a00; 
+            border: none; 
+            color: white; 
+            padding: 15px 25px; 
+            margin: 10px; 
+            cursor: pointer; 
+            border-radius: 8px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        .lang-btn.active { 
+            background: #00ff00; 
+            color: #000;
+        }
+        .test-content { 
+            margin: 30px 0; 
+            padding: 20px; 
+            background: rgba(255,255,255,0.1); 
+            border-radius: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>🔥 FINAL TEST - TR/EN BUTONLARI 🔥</h1>
+    
+    <div class="language-selector">
+        <button class="lang-btn active" data-lang="tr">TR</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+    
+    <div class="test-content">
+        <h2 data-translate="hero-title">AstroVia</h2>
+        <p data-translate="hero-subtitle">Gelişmiş Asteroid Savunma ve Çarpma Simülasyon Sistemi</p>
+        <p data-translate="hero-description">NASA ve USGS verilerini kullanarak asteroid tehditlerini analiz edin.</p>
+    </div>
+
+    <script>
+        // EN BASIT VE GARANTİLİ VERSİYON
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('lang-btn')) {
+                console.log('🔥 BUTON TIKLANDI:', e.target.textContent);
+                
+                e.preventDefault();
+                e.stopPropagation();
+                
+                const lang = e.target.getAttribute('data-lang');
+                console.log('🔥 Dil:', lang);
+                
+                if (!lang) return;
+                
+                // Butonları güncelle
+                document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                // Basit çeviri
+                if (lang === 'tr') {
+                    document.querySelectorAll('[data-translate="hero-title"]').forEach(el => el.textContent = 'AstroVia');
+                    document.querySelectorAll('[data-translate="hero-subtitle"]').forEach(el => el.textContent = 'Gelişmiş Asteroid Savunma ve Çarpma Simülasyon Sistemi');
+                    document.querySelectorAll('[data-translate="hero-description"]').forEach(el => el.textContent = 'NASA ve USGS verilerini kullanarak asteroid tehditlerini analiz edin.');
+                } else if (lang === 'en') {
+                    document.querySelectorAll('[data-translate="hero-title"]').forEach(el => el.textContent = 'AstroVia');
+                    document.querySelectorAll('[data-translate="hero-subtitle"]').forEach(el => el.textContent = 'Advanced Asteroid Defense and Impact Simulation System');
+                    document.querySelectorAll('[data-translate="hero-description"]').forEach(el => el.textContent = 'Analyze asteroid threats and simulate impact effects using NASA and USGS data.');
+                }
+                
+                console.log('🔥 TAMAMLANDI!');
+            }
+        });
+        
+        console.log('🔥 Final test sayfası yüklendi!');
+    </script>
+</body>
+</html>

@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Debug Language Buttons - AstroVia</title>
+    <link href="style.css" rel="stylesheet">
+</head>
+<body>
+    <div class="stars"></div>
+    <div class="cosmic-bg"></div>
+    
+    <!-- Navigation -->
+    <nav class="main-nav">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/" class="brand-link">
+                    <img 
+                        src="/brand/astrovia-logo.svg" 
+                        alt="AstroVia planetary defense logo" 
+                        width="160" 
+                        height="40" 
+                        loading="lazy" 
+                        decoding="async" 
+                        class="brand-logo"
+                    />
+                    <span class="sr-only">AstroVia</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link" data-translate="nav-home">Home</a>
+                <a href="detect.html" class="nav-link" data-translate="nav-detect">Blink Analysis</a>
+                <a href="impact.html" class="nav-link" data-translate="nav-impact">Impact Simulation</a>
+                <a href="about.html" class="nav-link" data-translate="nav-about">About</a>
+                <a href="legal.html" class="nav-link" data-translate="nav-legal">Legal</a>
+                <div class="language-selector">
+                    <button class="lang-btn active" data-lang="tr">TR</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Debug Content -->
+    <section class="hero-section" style="padding-top: 100px;">
+        <div class="container">
+            <h1 data-translate="hero-title">AstroVia</h1>
+            <p data-translate="hero-subtitle">Advanced Asteroid Defense and Impact Simulation System</p>
+            <p data-translate="hero-description">Analyze asteroid threats and simulate impact effects using NASA and USGS data.</p>
+            
+            <div class="hero-main-actions">
+                <a href="detect.html" class="primary-button large">
+                    <span class="btn-icon">🔍</span>
+                    <span data-translate="btn-blink">Blink Analysis</span>
+                </a>
+                <a href="impact.html" class="primary-button large">
+                    <span class="btn-icon">💥</span>
+                    <span data-translate="btn-impact">Impact Simulation</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Debug Panel -->
+    <section style="padding: 50px 0; background: rgba(0,0,0,0.8);">
+        <div class="container">
+            <h2>🔧 Language Button Debug Panel</h2>
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 20px 0;">
+                <div>
+                    <h3>Button Status</h3>
+                    <ul id="button-status"></ul>
+                </div>
+                <div>
+                    <h3>Translation Status</h3>
+                    <p>Current Language: <span id="current-lang">-</span></p>
+                    <p>Translated Elements: <span id="translated-count">-</span></p>
+                    <p>Last Click: <span id="last-click">-</span></p>
+                </div>
+            </div>
+            
+            <div style="margin: 20px 0;">
+                <h3>Manual Tests</h3>
+                <button onclick="testButtons()" style="background: #ff7a00; color: white; border: none; padding: 10px 20px; margin: 5px; border-radius: 5px; cursor: pointer;">Test All Buttons</button>
+                <button onclick="clearDebug()" style="background: #666; color: white; border: none; padding: 10px 20px; margin: 5px; border-radius: 5px; cursor: pointer;">Clear Debug</button>
+            </div>
+        </div>
+    </section>
+
+    <script src="main.js"></script>
+    <script>
+        // Debug functions
+        function updateDebugInfo() {
+            const langButtons = document.querySelectorAll('.lang-btn');
+            const buttonStatus = document.getElementById('button-status');
+            const currentLang = document.getElementById('current-lang');
+            const translatedCount = document.getElementById('translated-count');
+            
+            // Update button status
+            buttonStatus.innerHTML = '';
+            langButtons.forEach((btn, index) => {
+                const li = document.createElement('li');
+                li.textContent = `Button ${index}: ${btn.textContent} (${btn.getAttribute('data-lang')}) - Active: ${btn.classList.contains('active')}`;
+                buttonStatus.appendChild(li);
+            });
+            
+            // Update other info
+            currentLang.textContent = localStorage.getItem('selectedLanguage') || 'tr';
+            translatedCount.textContent = document.querySelectorAll('[data-translate]').length;
+        }
+        
+        function testButtons() {
+            console.log('Testing all language buttons...');
+            const buttons = document.querySelectorAll('.lang-btn');
+            buttons.forEach((btn, index) => {
+                console.log(`Testing button ${index}:`, btn.textContent);
+                btn.click();
+                setTimeout(() => {
+                    console.log(`Button ${index} result:`, btn.classList.contains('active'));
+                }, 100);
+            });
+        }
+        
+        function clearDebug() {
+            console.clear();
+            console.log('Debug cleared');
+        }
+        
+        // Override click handler for debugging
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('lang-btn')) {
+                document.getElementById('last-click').textContent = e.target.textContent + ' (' + e.target.getAttribute('data-lang') + ')';
+                console.log('Language button clicked:', e.target.textContent, e.target.getAttribute('data-lang'));
+            }
+        });
+        
+        // Initialize debug
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('Debug page loaded');
+            updateDebugInfo();
+            
+            // Update debug info every 2 seconds
+            setInterval(updateDebugInfo, 2000);
+        });
+    </script>
+</body>
+</html>

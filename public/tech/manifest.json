@@ -1,0 +1,71 @@
+{
+  "generatedAt": "2025-10-05T19:37:14.294Z",
+  "items": [
+    {
+      "name": "1-title-slide.jpg",
+      "path": "/tech/1-title-slide.jpg",
+      "ext": "jpg",
+      "size": 108
+    },
+    {
+      "name": "2-technology-process.jpg",
+      "path": "/tech/2-technology-process.jpg",
+      "ext": "jpg",
+      "size": 241
+    },
+    {
+      "name": "3-uniqueness-impact.jpg",
+      "path": "/tech/3-uniqueness-impact.jpg",
+      "ext": "jpg",
+      "size": 367
+    },
+    {
+      "name": "4-problem.jpg",
+      "path": "/tech/4-problem.jpg",
+      "ext": "jpg",
+      "size": 377
+    },
+    {
+      "name": "5-solution-overview.jpg",
+      "path": "/tech/5-solution-overview.jpg",
+      "ext": "jpg",
+      "size": 306
+    },
+    {
+      "name": "6-future-vision.jpg",
+      "path": "/tech/6-future-vision.jpg",
+      "ext": "jpg",
+      "size": 239
+    },
+    {
+      "name": "7-summary-inspiration.jpg",
+      "path": "/tech/7-summary-inspiration.jpg",
+      "ext": "jpg",
+      "size": 289
+    },
+    {
+      "name": "example-document.pdf",
+      "path": "/tech/example-document.pdf",
+      "ext": "pdf",
+      "size": 69
+    },
+    {
+      "name": "example-presentation.pptx",
+      "path": "/tech/example-presentation.pptx",
+      "ext": "pptx",
+      "size": 91
+    },
+    {
+      "name": "manifest.json",
+      "path": "/tech/manifest.json",
+      "ext": "json",
+      "size": 449
+    },
+    {
+      "name": "README.md",
+      "path": "/tech/README.md",
+      "ext": "md",
+      "size": 499
+    }
+  ]
+}

@@ -1,0 +1,17 @@
+# AstroVia Brand Mark - Square Icon
+# This file should be replaced with an actual WebP image
+# 
+# Design Specifications:
+# - Size: 512x512 pixels
+# - Format: WebP
+# - Content: Square version of AstroVia logo
+# - Elements: Stylized planet with rings + meteor
+# - Background: Dark blue/black (#0b1220)
+# - Colors: White planet, purple/blue rings, orange/red meteor
+# 
+# Usage:
+# - Favicon fallback
+# - Apple touch icon
+# - PWA app icon
+# - Social media sharing
+# - Windows tile

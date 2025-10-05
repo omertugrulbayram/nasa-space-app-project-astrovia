@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simple TR/EN Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #0b1220; color: white; }
+        .lang-btn { 
+            background: #ff7a00; 
+            border: none; 
+            color: white; 
+            padding: 10px 20px; 
+            margin: 5px; 
+            cursor: pointer; 
+            border-radius: 5px;
+        }
+        .lang-btn.active { background: #00ff00; }
+        .test-content { margin: 20px 0; padding: 20px; background: rgba(255,255,255,0.1); }
+    </style>
+</head>
+<body>
+    <h1>TR/EN Button Test</h1>
+    
+    <div class="language-selector">
+        <button class="lang-btn active" data-lang="tr">TR</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+    
+    <div class="test-content">
+        <h2 data-translate="hero-title">AstroVia</h2>
+        <p data-translate="hero-subtitle">Gelişmiş Asteroid Savunma ve Çarpma Simülasyon Sistemi</p>
+        <p data-translate="hero-description">NASA ve USGS verilerini kullanarak asteroid tehditlerini analiz edin.</p>
+    </div>
+    
+    <div id="debug">
+        <h3>Debug Info:</h3>
+        <p>Current Language: <span id="current-lang">-</span></p>
+        <p>Buttons Found: <span id="button-count">-</span></p>
+        <p>Last Click: <span id="last-click">-</span></p>
+    </div>
+
+    <script>
+        // Basit test script
+        console.log('Simple test page loaded');
+        
+        // Event delegation
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('lang-btn')) {
+                console.log('Button clicked:', e.target.textContent, e.target.getAttribute('data-lang'));
+                
+                // Update debug info
+                document.getElementById('last-click').textContent = e.target.textContent;
+                
+                // Update active button
+                document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                
+                // Change language
+                const lang = e.target.getAttribute('data-lang');
+                document.getElementById('current-lang').textContent = lang;
+                
+                // Simple translation
+                const translations = {
+                    tr: {
+                        'hero-title': 'AstroVia',
+                        'hero-subtitle': 'Gelişmiş Asteroid Savunma ve Çarpma Simülasyon Sistemi',
+                        'hero-description': 'NASA ve USGS verilerini kullanarak asteroid tehditlerini analiz edin.'
+                    },
+                    en: {
+                        'hero-title': 'AstroVia',
+                        'hero-subtitle': 'Advanced Asteroid Defense and Impact Simulation System',
+                        'hero-description': 'Analyze asteroid threats using NASA and USGS data.'
+                    }
+                };
+                
+                const currentTranslations = translations[lang];
+                if (currentTranslations) {
+                    Object.keys(currentTranslations).forEach(key => {
+                        const elements = document.querySelectorAll(`[data-translate="${key}"]`);
+                        elements.forEach(element => {
+                            element.textContent = currentTranslations[key];
+                        });
+                    });
+                }
+                
+                console.log('Language changed to:', lang);
+            }
+        });
+        
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            const buttons = document.querySelectorAll('.lang-btn');
+            document.getElementById('button-count').textContent = buttons.length;
+            document.getElementById('current-lang').textContent = 'tr';
+            
+            console.log('Found buttons:', buttons.length);
+            buttons.forEach((btn, i) => {
+                console.log(`Button ${i}:`, btn.textContent, btn.getAttribute('data-lang'));
+            });
+        });
+    </script>
+</body>
+</html>

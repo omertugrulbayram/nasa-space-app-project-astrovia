@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>1. FITS Dosya Okuma ve Görüntüleme</title>
+    <style>
+        body { 
+            background: #0b1220; 
+            color: white; 
+            font-family: 'Courier New', monospace; 
+            margin: 0; 
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .title { font-size: 28px; font-weight: bold; text-align: center; margin: 20px 0; color: #ff7a00; }
+        .code-block { 
+            background: #1a1a2e; 
+            border: 1px solid #333; 
+            border-radius: 8px; 
+            padding: 20px; 
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        .code-title { font-size: 18px; font-weight: bold; color: #00ff00; margin-bottom: 10px; }
+        .comment { color: #888; }
+        .keyword { color: #ff6b6b; }
+        .string { color: #4ecdc4; }
+        .function { color: #45b7d1; }
+        .number { color: #f9ca24; }
+        .step { 
+            background: rgba(255, 122, 0, 0.1); 
+            border-left: 4px solid #ff7a00; 
+            padding: 15px; 
+            margin: 15px 0;
+        }
+        .step-title { font-weight: bold; color: #ff7a00; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">1. FITS Dosya Okuma ve Görüntüleme</div>
+        
+        <div class="step">
+            <div class="step-title">Gerekli Kütüphaneler</div>
+            <div class="code-block">
+                <div class="code-title">Kurulum:</div>
+                <span class="comment"># Gerekli kütüphaneleri yükle</span><br>
+                !pip install astropy numpy matplotlib
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">FITS Dosyası Okuma ve Analiz</div>
+            <div class="code-block">
+                <div class="code-title">Python Kodu:</div>
+                <span class="keyword">import</span> os<br>
+                <span class="keyword">from</span> astropy.io <span class="keyword">import</span> fits<br>
+                <span class="keyword">import</span> numpy <span class="keyword">as</span> np<br>
+                <span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt<br><br>
+
+                <span class="comment"># Veri klasörü yolu</span><br>
+                DATA_DIR = <span class="string">r"C:\Users\omerbyrm\Desktop\asteroid_project\data"</span><br><br>
+
+                <span class="keyword">def</span> <span class="function">read_and_display_fits</span>(data_dir):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"""FITS dosyasını okur ve görüntüler"""</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># FITS dosyalarını bul</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;fits_files = [f <span class="keyword">for</span> f <span class="keyword">in</span> os.listdir(data_dir) <span class="keyword">if</span> f.endswith(<span class="string">'.fits'</span>)]<br><br>
+                
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> <span class="keyword">not</span> fits_files:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">"HATA: FITS dosyası bulunamadı."</span>)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span><br><br>
+                
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># İlk dosyayı aç</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;first_file = fits_files[<span class="number">0</span>]<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;file_path = os.path.join(data_dir, first_file)<br><br>
+                
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">with</span> fits.open(file_path) <span class="keyword">as</span> hdul:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;image_data = hdul[<span class="number">0</span>].data<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;header = hdul[<span class="number">0</span>].header<br><br>
+                
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Görüntüyü çiz</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;plt.figure(figsize=(<span class="number">10</span>, <span class="number">8</span>))<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;plt.imshow(image_data, cmap=<span class="string">'gray'</span>, origin=<span class="string">'lower'</span>)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;plt.title(f<span class="string">"FITS Görüntüsü: {first_file}"</span>)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;plt.show()
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">Özellikler:</div>
+            <ul>
+                <li>✅ FITS dosyalarını otomatik bulma</li>
+                <li>✅ Görüntü verisi ve başlık bilgisi okuma</li>
+                <li>✅ Matplotlib ile görselleştirme</li>
+                <li>✅ Hata kontrolü ve güvenli dosya işleme</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

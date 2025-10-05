@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Project - AstroVia Analysis</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="favicon.ico">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-logo">
+                <a href="/" class="brand-link">
+                    <span class="logo-text" style="font-size: 24px; font-weight: bold; color: #ff7a00;">ASTROVIA</span>
+                    <span class="sr-only">AstroVia</span>
+                </a>
+            </div>
+            <div class="nav-links">
+                <a href="index.html" class="nav-link" data-translate="nav-home">Home</a>
+                <a href="detect.html" class="nav-link" data-translate="nav-detect">Blink Analysis</a>
+                <a href="impact.html" class="nav-link" data-translate="nav-impact">Impact Simulation</a>
+                <a href="analysis.html" class="nav-link active">AI Project</a>
+                <a href="about.html" class="nav-link" data-translate="nav-about">About</a>
+                <a href="legal.html" class="nav-link" data-translate="nav-legal">Legal</a>
+                <div class="language-selector">
+                    <button class="lang-btn active" data-lang="tr">TR</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <div class="container">
+            <div class="analysis-header">
+                <h1 class="analysis-title">AI Project - Asteroid Detection Analysis</h1>
+                <p class="analysis-subtitle">Python kodları ile asteroit tespiti algoritmaları</p>
+            </div>
+
+            <div class="code-sections">
+                <!-- 1. Satır -->
+                <div class="code-section">
+                    <h2 class="code-title">1. Satır: Kütüphane Kurulumu</h2>
+                    <div class="code-block">
+                        <div class="line-number">1</div>
+                        <div class="code-line">!pip install astropy numpy matplotlib</div>
+                    </div>
+                </div>
+
+                <!-- 2. Satır -->
+                <div class="code-section">
+                    <h2 class="code-title">2. Satır: FITS Dosya Okuma ve Görüntüleme</h2>
+                    <div class="code-block">
+                        <div class="line-number">1</div>
+                        <div class="code-line">import os</div>
+                        <div class="line-number">2</div>
+                        <div class="code-line">from astropy.io import fits</div>
+                        <div class="line-number">3</div>
+                        <div class="code-line">import numpy as np</div>
+                        <div class="line-number">4</div>
+                        <div class="code-line">import matplotlib.pyplot as plt</div>
+                        <div class="line-number">5</div>
+                        <div class="line-number">6</div>
+                        <div class="code-line"># Dosyalarınızın bulunduğu klasör yolu</div>
+                        <div class="line-number">7</div>
+                        <div class="code-line">DATA_DIR = r"C:\Users\omerbyrm\Desktop\asteroid_project\data"</div>
+                        <div class="line-number">8</div>
+                        <div class="line-number">9</div>
+                        <div class="code-line">def read_and_display_fits(data_dir):</div>
+                        <div class="line-number">10</div>
+                        <div class="code-line">    """FITS dosyasını okur ve görüntüler"""</div>
+                        <div class="line-number">11</div>
+                        <div class="code-line">    fits_files = [f for f in os.listdir(data_dir) if f.endswith('.fits')]</div>
+                        <div class="line-number">12</div>
+                        <div class="code-line">    if not fits_files:</div>
+                        <div class="line-number">13</div>
+                        <div class="code-line">        print(f"HATA: '{data_dir}' klasöründe FITS dosyası bulunamadı.")</div>
+                        <div class="line-number">14</div>
+                        <div class="code-line">        return</div>
+                        <div class="line-number">15</div>
+                        <div class="line-number">16</div>
+                        <div class="code-line">    first_file = fits_files[0]</div>
+                        <div class="line-number">17</div>
+                        <div class="code-line">    file_path = os.path.join(data_dir, first_file)</div>
+                        <div class="line-number">18</div>
+                        <div class="code-line">    print(f"--- 1. Dosya Okunuyor: {first_file} ---")</div>
+                        <div class="line-number">19</div>
+                        <div class="line-number">20</div>
+                        <div class="code-line">    try:</div>
+                        <div class="line-number">21</div>
+                        <div class="code-line">        with fits.open(file_path) as hdul:</div>
+                        <div class="line-number">22</div>
+                        <div class="code-line">            image_data = hdul[0].data</div>
+                        <div class="line-number">23</div>
+                        <div class="code-line">            header = hdul[0].header</div>
+                        <div class="line-number">24</div>
+                        <div class="line-number">25</div>
+                        <div class="code-line">            print(f"Dosyanın türü: {header.get('INSTRUME', 'Bilinmiyor')}")</div>
+                        <div class="line-number">26</div>
+                        <div class="code-line">            print(f"Görüntü Boyutu: {image_data.shape}")</div>
+                        <div class="line-number">27</div>
+                        <div class="line-number">28</div>
+                        <div class="code-line">            plt.figure(figsize=(10, 8))</div>
+                        <div class="line-number">29</div>
+                        <div class="code-line">            plt.imshow(image_data, cmap='gray', origin='lower')</div>
+                        <div class="line-number">30</div>
+                        <div class="code-line">            plt.title(f"FITS Görüntüsü: {first_file}")</div>
+                        <div class="code-line">            plt.show()</div>
+                        <div class="line-number">31</div>
+                        <div class="line-number">32</div>
+                        <div class="code-line">    except Exception as e:</div>
+                        <div class="line-number">33</div>
+                        <div class="code-line">        print(f"Dosya okuma sırasında hata: {e}")</div>
+                        <div class="line-number">34</div>
+                        <div class="line-number">35</div>
+                        <div class="code-line">if __name__ == "__main__":</div>
+                        <div class="line-number">36</div>
+                        <div class="code-line">    read_and_display_fits(DATA_DIR)</div>
+                    </div>
+                </div>
+
+                <!-- 3. Satır -->
+                <div class="code-section">
+                    <h2 class="code-title">3. Satır: Kaynak Tespiti Kütüphanesi</h2>
+                    <div class="code-block">
+                        <div class="line-number">1</div>
+                        <div class="code-line">!pip install photutils</div>
+                    </div>
+                </div>
+
+                <!-- 4. Satır -->
+                <div class="code-section">
+                    <h2 class="code-title">4. Satır: DAOStarFinder ile Kaynak Tespiti</h2>
+                    <div class="code-block">
+                        <div class="line-number">1</div>
+                        <div class="code-line">import numpy as np</div>
+                        <div class="line-number">2</div>
+                        <div class="code-line">import matplotlib.pyplot as plt</div>
+                        <div class="line-number">3</div>
+                        <div class="code-line">from photutils.detection import DAOStarFinder</div>
+                        <div class="line-number">4</div>
+                        <div class="code-line">from astropy.stats import mad_std</div>
+                        <div class="line-number">5</div>
+                        <div class="line-number">6</div>
+                        <div class="code-line">def find_sources(image_data):</div>
+                        <div class="line-number">7</div>
+                        <div class="code-line">    """Görüntü verisi içinde parlak noktaları tespit eder"""</div>
+                        <div class="line-number">8</div>
+                        <div class="code-line">    bkg_sigma = mad_std(image_data)</div>
+                        <div class="line-number">9</div>
+                        <div class="code-line">    print(f"Arkaplan Gürültüsü: {bkg_sigma:.2f}")</div>
+                        <div class="line-number">10</div>
+                        <div class="line-number">11</div>
+                        <div class="code-line">    daofind = DAOStarFinder(fwhm=3.0, threshold=5.0 * bkg_sigma)</div>
+                        <div class="line-number">12</div>
+                        <div class="code-line">    sources = daofind(image_data)</div>
+                        <div class="line-number">13</div>
+                        <div class="line-number">14</div>
+                        <div class="code-line">    if sources is None:</div>
+                        <div class="line-number">15</div>
+                        <div class="code-line">        print("Kaynak bulunamadı")</div>
+                        <div class="line-number">16</div>
+                        <div class="code-line">        return None</div>
+                        <div class="line-number">17</div>
+                        <div class="line-number">18</div>
+                        <div class="code-line">    print(f"Tespit Edilen Kaynak Sayısı: {len(sources)}")</div>
+                        <div class="line-number">19</div>
+                        <div class="code-line">    return sources</div>
+                        <div class="line-number">20</div>
+                        <div class="line-number">21</div>
+                        <div class="code-line">def visualize_sources(image_data, sources):</div>
+                        <div class="line-number">22</div>
+                        <div class="code-line">    """Tespit edilen kaynakları görselleştirir"""</div>
+                        <div class="line-number">23</div>
+                        <div class="code-line">    plt.figure(figsize=(10, 8))</div>
+                        <div class="line-number">24</div>
+                        <div class="code-line">    plt.imshow(image_data, cmap='gray', origin='lower')</div>
+                        <div class="line-number">25</div>
+                        <div class="code-line">    plt.scatter(sources['xcentroid'], sources['ycentroid'],</div>
+                        <div class="line-number">26</div>
+                        <div class="code-line">                s=100, edgecolor='red', facecolor='none')</div>
+                        <div class="line-number">27</div>
+                        <div class="code-line">    plt.title("Tespit Edilen Parlak Cisimler")</div>
+                        <div class="line-number">28</div>
+                        <div class="code-line">    plt.show()</div>
+                    </div>
+                </div>
+
+                <!-- 5. Satır -->
+                <div class="code-section">
+                    <h2 class="code-title">5. Satır: Dosya Gruplama ve Zaman Sıralama</h2>
+                    <div class="code-block">
+                        <div class="line-number">1</div>
+                        <div class="code-line">import os</div>
+                        <div class="line-number">2</div>
+                        <div class="code-line">from astropy.io import fits</div>
+                        <div class="line-number">3</div>
+                        <div class="code-line">from collections import defaultdict</div>
+                        <div class="line-number">4</div>
+                        <div class="code-line">import glob</div>
+                        <div class="line-number">5</div>
+                        <div class="line-number">6</div>
+                        <div class="code-line">def get_group_key(filename):</div>
+                        <div class="line-number">7</div>
+                        <div class="code-line">    """Dosya adından grup anahtarını çıkarır"""</div>
+                        <div class="line-number">8</div>
+                        <div class="code-line">    parts = filename.split('.')</div>
+                        <div class="line-number">9</div>
+                        <div class="code-line">    return ".".join(parts[:-2])</div>
+                        <div class="line-number">10</div>
+                        <div class="line-number">11</div>
+                        <div class="code-line">def get_observation_time(filepath):</div>
+                        <div class="line-number">12</div>
+                        <div class="code-line">    """FITS başlığından gözlem zamanını okur"""</div>
+                        <div class="line-number">13</div>
+                        <div class="code-line">    try:</div>
+                        <div class="line-number">14</div>
+                        <div class="code-line">        with fits.open(filepath) as hdul:</div>
+                        <div class="line-number">15</div>
+                        <div class="code-line">            header = hdul[0].header</div>
+                        <div class="line-number">16</div>
+                        <div class="code-line">            time_key = 'MJD-OBS'</div>
+                        <div class="line-number">17</div>
+                        <div class="code-line">            if time_key in header:</div>
+                        <div class="line-number">18</div>
+                        <div class="code-line">                return header[time_key]</div>
+                        <div class="line-number">19</div>
+                        <div class="line-number">20</div>
+                        <div class="code-line">    except Exception as e:</div>
+                        <div class="line-number">21</div>
+                        <div class="code-line">        print(f"Zaman okunamadı: {filepath}")</div>
+                        <div class="line-number">22</div>
+                        <div class="code-line">        return 0.0</div>
+                        <div class="line-number">23</div>
+                        <div class="line-number">24</div>
+                        <div class="code-line">def group_and_sort_files(data_dir):</div>
+                        <div class="line-number">25</div>
+                        <div class="code-line">    """FITS dosyalarını gruplar ve zamana göre sıralar"""</div>
+                        <div class="line-number">26</div>
+                        <div class="code-line">    all_fits_files = glob.glob(os.path.join(data_dir, '*.fits'))</div>
+                        <div class="line-number">27</div>
+                        <div class="code-line">    grouped_files = defaultdict(list)</div>
+                        <div class="line-number">28</div>
+                        <div class="line-number">29</div>
+                        <div class="code-line">    for filepath in all_fits_files:</div>
+                        <div class="line-number">30</div>
+                        <div class="code-line">        filename = os.path.basename(filepath)</div>
+                        <div class="line-number">31</div>
+                        <div class="code-line">        key = get_group_key(filename)</div>
+                        <div class="line-number">32</div>
+                        <div class="code-line">        time_value = get_observation_time(filepath)</div>
+                        <div class="line-number">33</div>
+                        <div class="code-line">        grouped_files[key].append((filepath, time_value))</div>
+                        <div class="line-number">34</div>
+                        <div class="line-number">35</div>
+                        <div class="code-line">    sorted_groups = {}</div>
+                        <div class="line-number">36</div>
+                        <div class="code-line">    for key, file_list in grouped_files.items():</div>
+                        <div class="line-number">37</div>
+                        <div class="code-line">        sorted_list = sorted(file_list, key=lambda item: item[1])</div>
+                        <div class="line-number">38</div>
+                        <div class="code-line">        sorted_groups[key] = [item[0] for item in sorted_list]</div>
+                        <div class="line-number">39</div>
+                        <div class="line-number">40</div>
+                        <div class="code-line">    return sorted_groups</div>
+                    </div>
+                </div>
+
+                <!-- 6. Satır -->
+                <div class="code-section">
+                    <h2 class="code-title">6. Satır: Hareketli Cisim Bağlama (Linking)</h2>
+                    <div class="code-block">
+                        <div class="line-number">1</div>
+                        <div class="code-line">import numpy as np</div>
+                        <div class="line-number">2</div>
+                        <div class="code-line">import pandas as pd</div>
+                        <div class="line-number">3</div>
+                        <div class="code-line">from astropy.io import fits</div>
+                        <div class="line-number">4</div>
+                        <div class="code-line">from photutils.detection import DAOStarFinder</div>
+                        <div class="line-number">5</div>
+                        <div class="code-line">from astropy.stats import mad_std</div>
+                        <div class="line-number">6</div>
+                        <div class="line-number">7</div>
+                        <div class="code-line">def link_moving_objects(sorted_file_group, data_dir, search_radius=10):</div>
+                        <div class="line-number">8</div>
+                        <div class="code-line">    """Ardışık FITS dosyalarında hareket eden cisimleri bulur"""</div>
+                        <div class="line-number">9</div>
+                        <div class="code-line">    all_source_data = []</div>
+                        <div class="line-number">10</div>
+                        <div class="line-number">11</div>
+                        <div class="code-line">    for file_path in sorted_file_group:</div>
+                        <div class="line-number">12</div>
+                        <div class="code-line">        try:</div>
+                        <div class="line-number">13</div>
+                        <div class="code-line">            with fits.open(file_path) as hdul:</div>
+                        <div class="line-number">14</div>
+                        <div class="code-line">                image_data = hdul[0].data</div>
+                        <div class="line-number">15</div>
+                        <div class="code-line">                sources_df = find_sources(image_data)</div>
+                        <div class="line-number">16</div>
+                        <div class="code-line">                sources_df['image_index'] = len(all_source_data)</div>
+                        <div class="line-number">17</div>
+                        <div class="code-line">                all_source_data.append(sources_df[['xcentroid', 'ycentroid', 'image_index', 'flux']])</div>
+                        <div class="line-number">18</div>
+                        <div class="line-number">19</div>
+                        <div class="code-line">        except Exception as e:</div>
+                        <div class="line-number">20</div>
+                        <div class="code-line">            print(f"Hata: {file_path} okunurken sorun oluştu: {e}")</div>
+                        <div class="line-number">21</div>
+                        <div class="line-number">22</div>
+                        <div class="code-line">    if not all_source_data or len(all_source_data) < 2:</div>
+                        <div class="line-number">23</div>
+                        <div class="code-line">        return []</div>
+                        <div class="line-number">24</div>
+                        <div class="line-number">25</div>
+                        <div class="code-line">    print(f"İşlenecek {len(all_source_data)} Görüntü Var. Linking Başlatılıyor...")</div>
+                        <div class="line-number">26</div>
+                        <div class="line-number">27</div>
+                        <div class="code-line">    initial_sources = all_source_data[0]</div>
+                        <div class="line-number">28</div>
+                        <div class="code-line">    candidate_tracks = []</div>
+                        <div class="line-number">29</div>
+                        <div class="line-number">30</div>
+                        <div class="code-line">    for index1, row1 in initial_sources.iterrows():</div>
+                        <div class="line-number">31</div>
+                        <div class="code-line">        x1, y1 = row1['xcentroid'], row1['ycentroid']</div>
+                        <div class="line-number">32</div>
+                        <div class="code-line">        current_track = [(x1, y1, 0, row1['flux'])]</div>
+                        <div class="line-number">33</div>
+                        <div class="line-number">34</div>
+                        <div class="code-line">        for i in range(1, len(all_source_data)):</div>
+                        <div class="line-number">35</div>
+                        <div class="code-line">            x_prev, y_prev = current_track[-1][0], current_track[-1][1]</div>
+                        <div class="line-number">36</div>
+                        <div class="code-line">            next_sources = all_source_data[i]</div>
+                        <div class="line-number">37</div>
+                        <div class="line-number">38</div>
+                        <div class="code-line">            distances = np.sqrt((next_sources['xcentroid'] - x_prev)**2 +</div>
+                        <div class="line-number">39</div>
+                        <div class="code-line">                                (next_sources['ycentroid'] - y_prev)**2)</div>
+                        <div class="line-number">40</div>
+                        <div class="code-line">            min_distance = distances.min()</div>
+                        <div class="line-number">41</div>
+                        <div class="line-number">42</div>
+                        <div class="code-line">            if min_distance < search_radius:</div>
+                        <div class="line-number">43</div>
+                        <div class="code-line">                match_index = distances.idxmin()</div>
+                        <div class="line-number">44</div>
+                        <div class="code-line">                row_match = next_sources.loc[match_index]</div>
+                        <div class="line-number">45</div>
+                        <div class="code-line">                current_track.append((row_match['xcentroid'], row_match['ycentroid'], i, row_match['flux']))</div>
+                        <div class="line-number">46</div>
+                        <div class="line-number">47</div>
+                        <div class="code-line">            else:</div>
+                        <div class="line-number">48</div>
+                        <div class="code-line">                break</div>
+                        <div class="line-number">49</div>
+                        <div class="line-number">50</div>
+                        <div class="code-line">        if len(current_track) >= 2 and len(current_track) < len(all_source_data):</div>
+                        <div class="line-number">51</div>
+                        <div class="code-line">            total_movement = np.sqrt((current_track[-1][0] - current_track[0][0])**2 +</div>
+                        <div class="line-number">52</div>
+                        <div class="code-line">                                      (current_track[-1][1] - current_track[0][1])**2)</div>
+                        <div class="line-number">53</div>
+                        <div class="line-number">54</div>
+                        <div class="code-line">            if total_movement > 3.0:</div>
+                        <div class="line-number">55</div>
+                        <div class="code-line">                candidate_tracks.append(current_track)</div>
+                        <div class="line-number">56</div>
+                        <div class="line-number">57</div>
+                        <div class="code-line">    return candidate_tracks</div>
+                    </div>
+                </div>
+
+                <!-- 7. Satır -->
+                <div class="code-section">
+                    <h2 class="code-title">7. Satır: Sonuç Raporlama</h2>
+                    <div class="code-block">
+                        <div class="line-number">1</div>
+                        <div class="code-line">final_asteroid_candidates = []</div>
+                        <div class="line-number">2</div>
+                        <div class="line-number">3</div>
+                        <div class="code-line">for key, files in sorted_file_groups.items():</div>
+                        <div class="line-number">4</div>
+                        <div class="code-line">    if len(files) < 2:</div>
+                        <div class="line-number">5</div>
+                        <div class="code-line">        continue</div>
+                        <div class="line-number">6</div>
+                        <div class="line-number">7</div>
+                        <div class="code-line">    print(f"İşleniyor: {key}")</div>
+                        <div class="line-number">8</div>
+                        <div class="code-line">    candidate_tracks = link_moving_objects(files, DATA_DIR, search_radius=10)</div>
+                        <div class="line-number">9</div>
+                        <div class="code-line">    print(f"--> {len(candidate_tracks)} Hareketli Cisim Adayı Bulundu.")</div>
+                        <div class="line-number">10</div>
+                        <div class="line-number">11</div>
+                        <div class="code-line">    for i, track in enumerate(candidate_tracks):</div>
+                        <div class="line-number">12</div>
+                        <div class="code-line">        track_info = {</div>
+                        <div class="line-number">13</div>
+                        <div class="code-line">            'Grup_Anahtari': key,</div>
+                        <div class="line-number">14</div>
+                        <div class="code-line">            'Aday_ID': f'{key}_{i:02d}',</div>
+                        <div class="line-number">15</div>
+                        <div class="code-line">            'Baslangic_X': track[0][0],</div>
+                        <div class="line-number">16</div>
+                        <div class="code-line">            'Baslangic_Y': track[0][1],</div>
+                        <div class="line-number">17</div>
+                        <div class="code-line">            'Bitis_X': track[-1][0],</div>
+                        <div class="line-number">18</div>
+                        <div class="code-line">            'Bitis_Y': track[-1][1],</div>
+                        <div class="line-number">19</div>
+                        <div class="code-line">            'Kare_Sayisi': len(track),</div>
+                        <div class="line-number">20</div>
+                        <div class="code-line">            'Toplami_Hareket': np.sqrt((track[-1][0] - track[0][0])**2 + (track[-1][1] - track[0][1])**2),</div>
+                        <div class="line-number">21</div>
+                        <div class="code-line">            'Ortalama_Flux': np.mean([t[3] for t in track])</div>
+                        <div class="line-number">22</div>
+                        <div class="code-line">        }</div>
+                        <div class="line-number">23</div>
+                        <div class="code-line">        final_asteroid_candidates.append(track_info)</div>
+                        <div class="line-number">24</div>
+                        <div class="line-number">25</div>
+                        <div class="code-line">results_df = pd.DataFrame(final_asteroid_candidates)</div>
+                        <div class="line-number">26</div>
+                        <div class="line-number">27</div>
+                        <div class="code-line">print("## TÜM VERİ SETİ SONUÇLARI (Asteroit Adayları) ##")</div>
+                        <div class="line-number">28</div>
+                        <div class="code-line">print(results_df[['Grup_Anahtari', 'Aday_ID', 'Toplami_Hareket', 'Ortalama_Flux']].head(10))</div>
+                        <div class="line-number">29</div>
+                        <div class="line-number">30</div>
+                        <div class="code-line">results_df.to_csv('asteroid_candidates_report.csv', index=False)</div>
+                        <div class="line-number">31</div>
+                        <div class="code-line">print("Sonuçlar 'asteroid_candidates_report.csv' dosyasına kaydedildi.")</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-brand">
+                        <span class="logo-text" style="font-size: 20px; font-weight: bold; color: #ff7a00;">ASTROVIA</span>
+                        <span class="sr-only">AstroVia</span>
+                    </div>
+                    <p data-translate="footer-description">Planetary defense systems with scientific data</p>
+                </div>
+                <div class="footer-section">
+                    <h3 data-translate="footer-links">Links</h3>
+                    <ul>
+                        <li><a href="index.html" data-translate="nav-home">Home</a></li>
+                        <li><a href="detect.html" data-translate="nav-detect">Blink Analysis</a></li>
+                        <li><a href="impact.html" data-translate="nav-impact">Impact Simulation</a></li>
+                        <li><a href="about.html" data-translate="nav-about">About</a></li>
+                        <li><a href="legal.html" data-translate="nav-legal">Legal</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2025 AstroVia. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="main.js"></script>
+    <script>
+        // TR/EN BUTONLARI - ANALYSIS SAYFASI
+        document.addEventListener('click', function(e) {
+            if (e.target.classList.contains('lang-btn')) {
+                console.log('🔥 ANALYSIS BUTON TIKLANDI:', e.target.textContent);
+                e.preventDefault();
+                e.stopPropagation();
+                const lang = e.target.getAttribute('data-lang');
+                console.log('🔥 ANALYSIS Dil:', lang);
+                if (!lang) return;
+                document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+                e.target.classList.add('active');
+                // Basit çeviri
+                if (lang === 'tr') {
+                    document.querySelectorAll('[data-translate="nav-home"]').forEach(el => el.textContent = 'Ana Sayfa');
+                    document.querySelectorAll('[data-translate="nav-detect"]').forEach(el => el.textContent = 'Blink Analiz');
+                    document.querySelectorAll('[data-translate="nav-impact"]').forEach(el => el.textContent = 'Etki Simülasyonu');
+                    document.querySelectorAll('[data-translate="nav-about"]').forEach(el => el.textContent = 'Hakkında');
+                    document.querySelectorAll('[data-translate="nav-legal"]').forEach(el => el.textContent = 'Yasal');
+                    document.querySelectorAll('[data-translate="footer-description"]').forEach(el => el.textContent = 'Bilimsel verilerle gezegen savunma sistemleri');
+                    document.querySelectorAll('[data-translate="footer-links"]').forEach(el => el.textContent = 'Bağlantılar');
+                } else if (lang === 'en') {
+                    document.querySelectorAll('[data-translate="nav-home"]').forEach(el => el.textContent = 'Home');
+                    document.querySelectorAll('[data-translate="nav-detect"]').forEach(el => el.textContent = 'Blink Analysis');
+                    document.querySelectorAll('[data-translate="nav-impact"]').forEach(el => el.textContent = 'Impact Simulation');
+                    document.querySelectorAll('[data-translate="nav-about"]').forEach(el => el.textContent = 'About');
+                    document.querySelectorAll('[data-translate="nav-legal"]').forEach(el => el.textContent = 'Legal');
+                    document.querySelectorAll('[data-translate="footer-description"]').forEach(el => el.textContent = 'Planetary defense systems with scientific data');
+                    document.querySelectorAll('[data-translate="footer-links"]').forEach(el => el.textContent = 'Links');
+                }
+                console.log('🔥 ANALYSIS TAMAMLANDI!');
+            }
+        });
+        console.log('🔥 ANALYSIS TR/EN SCRIPT YÜKLENDİ!');
+    </script>
+    
+    <!-- Main JavaScript -->
+    <script src="main.js"></script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>2. Kaynak Tespiti (DAOStarFinder)</title>
+    <style>
+        body { 
+            background: #0b1220; 
+            color: white; 
+            font-family: 'Courier New', monospace; 
+            margin: 0; 
+            padding: 20px;
+            line-height: 1.6;
+        }
+        .container { max-width: 1000px; margin: 0 auto; }
+        .title { font-size: 28px; font-weight: bold; text-align: center; margin: 20px 0; color: #ff7a00; }
+        .code-block { 
+            background: #1a1a2e; 
+            border: 1px solid #333; 
+            border-radius: 8px; 
+            padding: 20px; 
+            margin: 20px 0;
+            overflow-x: auto;
+        }
+        .code-title { font-size: 18px; font-weight: bold; color: #00ff00; margin-bottom: 10px; }
+        .comment { color: #888; }
+        .keyword { color: #ff6b6b; }
+        .string { color: #4ecdc4; }
+        .function { color: #45b7d1; }
+        .number { color: #f9ca24; }
+        .step { 
+            background: rgba(255, 122, 0, 0.1); 
+            border-left: 4px solid #ff7a00; 
+            padding: 15px; 
+            margin: 15px 0;
+        }
+        .step-title { font-weight: bold; color: #ff7a00; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="title">2. Kaynak Tespiti (DAOStarFinder)</div>
+        
+        <div class="step">
+            <div class="step-title">Gerekli Kütüphaneler</div>
+            <div class="code-block">
+                <div class="code-title">Kurulum:</div>
+                !pip install photutils
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">DAOStarFinder ile Kaynak Tespiti</div>
+            <div class="code-block">
+                <div class="code-title">Python Kodu:</div>
+                <span class="keyword">import</span> numpy <span class="keyword">as</span> np<br>
+                <span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt<br>
+                <span class="keyword">from</span> photutils.detection <span class="keyword">import</span> DAOStarFinder<br>
+                <span class="keyword">from</span> astropy.stats <span class="keyword">import</span> mad_std<br><br>
+
+                <span class="keyword">def</span> <span class="function">find_sources</span>(image_data):<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment">"""Görüntü verisi içinde parlak noktaları tespit eder"""</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># Arkaplan gürültüsünü hesaplama</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;bkg_sigma = mad_std(image_data)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;print(f<span class="string">"Arkaplan Gürültüsü (Sigma): {bkg_sigma:.2f}"</span>)<br><br>
+                
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="comment"># DAOStarFinder tanımlama</span><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;daofind = DAOStarFinder(fwhm=<span class="number">3.0</span>, threshold=<span class="number">5.0</span> * bkg_sigma)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;sources = daofind(image_data)<br><br>
+                
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">if</span> sources <span class="keyword">is</span> <span class="keyword">None</span>:<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;print(<span class="string">"Kaynak bulunamadı"</span>)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> <span class="keyword">None</span><br><br>
+                
+                &nbsp;&nbsp;&nbsp;&nbsp;print(f<span class="string">"Tespit Edilen Kaynak Sayısı: {len(sources)}"</span>)<br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> sources
+            </div>
+        </div>
+
+        <div class="step">
+            <div class="step-title">Özellikler:</div>
+            <ul>
+                <li>✅ DAOStarFinder algoritması ile yıldız tespiti</li>
+                <li>✅ 5-sigma eşik değeri ile gürültü filtreleme</li>
+                <li>✅ FWHM parametresi ile kaynak boyutu ayarı</li>
+                <li>✅ Koordinat ve parlaklık bilgisi çıktısı</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

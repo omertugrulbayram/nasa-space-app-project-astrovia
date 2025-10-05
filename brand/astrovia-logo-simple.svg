@@ -1,0 +1,14 @@
+<svg width="160" height="40" viewBox="0 0 160 40" xmlns="http://www.w3.org/2000/svg">
+  <!-- Simple logo with white background -->
+  <rect width="160" height="40" fill="#ffffff" stroke="#ff7a00" stroke-width="2"/>
+  
+  <!-- Planet -->
+  <circle cx="25" cy="20" r="6" fill="#8b5cf6"/>
+  <circle cx="25" cy="20" r="3" fill="#ffffff"/>
+  
+  <!-- Meteor -->
+  <path d="M35 15 L45 20 L40 25 L35 15" fill="#ff7a00"/>
+  
+  <!-- Text -->
+  <text x="55" y="25" font-family="Arial, sans-serif" font-size="16" font-weight="bold" fill="#0b1220">ASTROVIA</text>
+</svg>
